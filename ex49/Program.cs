@@ -63,6 +63,8 @@ namespace ex49
 
         public void RemoveFish()
         {
+            bool isFound = false;
+
             Console.Write("Введите имя рыбки, которую хотите убрать: ");
             string name = Console.ReadLine();
 
@@ -70,13 +72,15 @@ namespace ex49
             {
                 if (_aquarium[i].Name == name)
                 {
+                    isFound = true;
                     _aquarium.Remove(_aquarium[i]);
                     Console.WriteLine($"Рыбка под именем {name} убрана");
                 }
-                else
-                {
-                    Console.WriteLine("Такой рыбки нет в аквариуме...");
-                }
+            }
+
+            if (isFound == false)
+            {
+                Console.WriteLine("Такой рыбки нет в аквариуме...");
             }
         }
 
