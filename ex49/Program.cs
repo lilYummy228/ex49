@@ -17,9 +17,7 @@ namespace ex49
 
             while (isOpen)
             {
-                Console.SetCursorPosition(0, 10);
                 aquarium.ShowAquarium();
-                Console.SetCursorPosition(0, 0);
 
                 Console.Write($"{CommandAddFish} - добавить рыбку в аквариум\n" +
                     $"{CommandRemoveFish} - убрать рыбку из аквариума\n" +
@@ -103,12 +101,15 @@ namespace ex49
 
         public void ShowAquarium()
         {
+            Console.SetCursorPosition(0, 10);
             Console.WriteLine("Аквариум");
 
             foreach (Fish fish in _aquarium)
             {
                 Console.WriteLine($"{fish.Name}. Возраст - {fish.Age}");
             }
+
+            Console.SetCursorPosition(0, 0);
         }
 
         public void AddFish()
@@ -135,15 +136,22 @@ namespace ex49
             Console.Write("Введите имя рыбки: ");
             string name = Console.ReadLine();
             Console.Write("Введите возраст рыбки: ");
-            int.TryParse(Console.ReadLine(), out int age);
 
-            if (age < _maxFishAge)
+            if (int.TryParse(Console.ReadLine(), out int age))
             {
-                return new Fish(name, age);
+                if (age < _maxFishAge)
+                {
+                    return new Fish(name, age);
+                }
+                else
+                {
+                    Console.WriteLine("Рыба не может столько жить");
+                    return null;
+                }
             }
             else
             {
-                Console.WriteLine("Рыба не может столько жить");
+                Console.WriteLine("Неверный ввод...");
                 return null;
             }
         }
