@@ -82,14 +82,6 @@ namespace ex49
             }
         }
 
-        public void RemoveDeadFish(Fish fish)
-        {
-            if (fish.Age == _maxFishAge)
-            {
-                _aquarium.Remove(fish);
-            }
-        }
-
         public void GrowUp()
         {
             for (int i = 0; i < _aquarium.Count; i++)
@@ -128,6 +120,14 @@ namespace ex49
             else
             {
                 Console.WriteLine("В аквариуме слишком много рыбок...");
+            }
+        }
+
+        private void RemoveDeadFish(Fish fish)
+        {
+            if (fish.Age == _maxFishAge)
+            {
+                _aquarium.Remove(fish);
             }
         }
 
