@@ -17,7 +17,7 @@ namespace ex49
 
             while (isOpen)
             {
-                aquarium.ShowAquarium();
+                aquarium.ShowFishes();
 
                 Console.Write($"{CommandAddFish} - добавить рыбку в аквариум\n" +
                     $"{CommandRemoveFish} - убрать рыбку из аквариума\n" +
@@ -87,11 +87,15 @@ namespace ex49
             for (int i = 0; i < _aquarium.Count; i++)
             {
                 _aquarium[i].LiveToDeath();
-                RemoveDeadFish(_aquarium[i]);
+
+                if (RemoveDeadFish(_aquarium[i]))
+                {
+                    i--;
+                }                
             }
         }
 
-        public void ShowAquarium()
+        public void ShowFishes()
         {
             Console.SetCursorPosition(0, 10);
             Console.WriteLine("Аквариум");
@@ -123,11 +127,16 @@ namespace ex49
             }
         }
 
-        private void RemoveDeadFish(Fish fish)
+        private bool RemoveDeadFish(Fish fish)
         {
             if (fish.Age == _maxFishAge)
             {
                 _aquarium.Remove(fish);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
